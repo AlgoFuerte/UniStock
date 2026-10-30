@@ -21,9 +21,7 @@ public class FileHandler {
 
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    /**
-     * Guarda una lista genérica SimpleList<T> en un archivo JSON.
-     */
+    
     public static <T> void saveListToJson(String filePath, SimpleList<T> list) {
         if (filePath == null || filePath.isBlank() || list == null) {
             return;
