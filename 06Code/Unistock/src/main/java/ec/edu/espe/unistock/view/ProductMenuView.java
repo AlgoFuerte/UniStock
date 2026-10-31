@@ -39,7 +39,7 @@ public class ProductMenuView {
             String stationeryType = console.readText("Tipo de articulo / material: ");
             product = productService.registerStationery(name, price, stock, brand, stationeryType);
         } else {
-            System.out.println("Categoría invalida.");
+            System.out.println("Categoria invalida.");
             return;
         }
 

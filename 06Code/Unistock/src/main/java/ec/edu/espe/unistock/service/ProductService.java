@@ -2,16 +2,16 @@ package ec.edu.espe.unistock.service;
 
 /**
  *
- * @author Dennis Criollo, Leslye Cuichan, Francisco Demera, Byte & Fabric Devs, @ESPE
+ * @author Dennis Criollo, Leslye Cuichan, Francisco Demera, Byte & Fabric Devs,
+ * @ESPE
  */
-
 import ec.edu.espe.unistock.model.Product;
 import ec.edu.espe.unistock.model.ProductCategory;
 import ec.edu.espe.unistock.model.Stationery;
 import ec.edu.espe.unistock.model.Uniform;
 import ec.edu.espe.unistock.structure.FileHandler;
 import ec.edu.espe.unistock.structure.SimpleList;
-
+import java.util.Locale;
 import java.math.BigDecimal;
 
 public class ProductService {
@@ -19,12 +19,14 @@ public class ProductService {
     private final SimpleList<Product> products = new SimpleList<>();
     private int nextId = 1;
 
+    private final String uniformsFile = "uniforms.json";
     private final UniformService uniformService;
     private final StationeryService stationeryService;
 
     public ProductService(UniformService uniformService, StationeryService stationeryService) {
         this.uniformService = uniformService;
         this.stationeryService = stationeryService;
+
     }
 
     public Product registerUniform(String name, BigDecimal price, int stock, String size, String school) {
@@ -39,7 +41,23 @@ public class ProductService {
 
         Product product = new Uniform(nextId++, name, price, stock, size, school);
         products.add(product);
+        saveUniforms();
         return product;
+    }
+
+    private static class UniformJson {
+
+        private final String school;
+        private final String size;
+        private final String name;
+        private final BigDecimal price;
+
+        UniformJson(Uniform uniform) {
+            this.school = uniform.getSchool();
+            this.size = uniform.getSize();
+            this.name = uniform.getName();
+            this.price = uniform.getPrice();
+        }
     }
 
     public Product registerStationery(String name, BigDecimal price, int stock, String brand, String type) {
@@ -90,6 +108,40 @@ public class ProductService {
         return true;
     }
 
+    private void saveUniforms() {
+        SimpleList<UniformJson> items = new SimpleList<>();
+        products.resetIteration();
+        while (products.hasNext()) {
+            Product product = products.next();
+            if (product instanceof Uniform uniform) {
+                items.add(new UniformJson(uniform));
+            }
+        }
+        FileHandler.saveListToJson(uniformsFile, items);
+        exportUniformsCSV();
+    }
+
+    public void exportUniformsCSV() {
+        SimpleList<String> rows = new SimpleList<>();
+        BigDecimal total = BigDecimal.ZERO;
+
+        products.resetIteration();
+        while (products.hasNext()) {
+            Product product = products.next();
+            if (product instanceof Uniform uniform) {
+                total = total.add(uniform.getPrice());
+                rows.add(String.format(Locale.US, "\"%s\",\"%s\",\"%s\",%.2f",
+                        uniform.getSchool(),
+                        uniform.getSize(),
+                        uniform.getName().replace("\"", "\"\""),
+                        uniform.getPrice()));
+            }
+        }
+
+        rows.add(String.format(Locale.US, "\"TOTAL\",\"\",\"\",%.2f", total));
+        FileHandler.exportToCSV("uniforms.csv", "Colegio,Talla,Nombre,Precio", rows);
+    }
+
     public Product findById(int id) {
         products.resetIteration();
         while (products.hasNext()) {
@@ -122,9 +174,6 @@ public class ProductService {
         return products;
     }
 
-    /**
-     * Exporta el catálogo actual de productos a un archivo en formato CSV.
-     */
     public void exportReportCSV(String filePath) {
         String header = "ID,Categoría,Nombre,Precio,Stock,Detalles";
         SimpleList<String> rows = new SimpleList<>();

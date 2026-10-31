@@ -72,7 +72,7 @@ public class SimpleList<T> {
 
     public T next() {
         if (cursor == null) {
-            throw new NoSuchElementException("No hay más elementos.");
+            throw new NoSuchElementException("No hay mas elementos.");
         }
         T data = cursor.data;
         cursor = cursor.next;

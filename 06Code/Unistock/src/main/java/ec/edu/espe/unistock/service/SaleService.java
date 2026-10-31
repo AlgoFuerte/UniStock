@@ -74,9 +74,7 @@ public class SaleService {
         return sales;
     }
 
-    /**
-     * Exporta el historial de ventas registradas a un archivo en formato CSV.
-     */
+   
     public void exportReportCSV(String filePath) {
         String header = "ID_Venta,Vendedor,Fecha,Total";
         SimpleList<String> rows = new SimpleList<>();

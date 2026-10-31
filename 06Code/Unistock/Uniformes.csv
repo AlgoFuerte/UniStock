@@ -1,0 +1,5 @@
+ID,Categoría,Nombre,Precio,Stock,Detalles
+1,Uniforme,"Camiseta Polo",12,50,3,"Talla: M | Colegio: Conocoto"
+2,Uniforme,"Medias Blancas",2,50,4,"Talla: M | Colegio: Conocoto"
+3,Uniforme,"Medias Educacion Fisica",2,50,34,"Talla: M | Colegio: Conocoto"
+4,Uniforme,"Chompa Educacion Fisica",23,50,34,"Talla: M | Colegio: Conocoto"

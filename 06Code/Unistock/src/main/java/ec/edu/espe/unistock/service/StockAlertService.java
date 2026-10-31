@@ -13,7 +13,7 @@ public class StockAlertService {
     private int threshold;
 
     public StockAlertService() {
-        this.threshold = 5;//valor of stock
+        this.threshold = 5;
     }
 
     public StockAlertService(int threshold) {

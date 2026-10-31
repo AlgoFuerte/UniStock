@@ -21,9 +21,6 @@ public class FileHandler {
 
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    /**
-     * Guarda una lista genérica SimpleList<T> en un archivo JSON.
-     */
     public static <T> void saveListToJson(String filePath, SimpleList<T> list) {
         if (filePath == null || filePath.isBlank() || list == null) {
             return;
@@ -47,9 +44,6 @@ public class FileHandler {
         }
     }
 
-    /**
-     * Carga una lista genérica SimpleList<T> desde un archivo JSON.
-     */
     public static <T> SimpleList<T> loadListFromJson(String filePath, Class<T> clazz) {
         SimpleList<T> list = new SimpleList<>();
         if (filePath == null || filePath.isBlank()) {
@@ -77,23 +71,14 @@ public class FileHandler {
         return list;
     }
 
-    /**
-     * Guarda una lista SimpleList de Strings (compatibilidad con catálogos).
-     */
     public static void saveList(String filePath, SimpleList<String> list) {
         saveListToJson(filePath, list);
     }
 
-    /**
-     * Carga una lista SimpleList de Strings (compatibilidad con catálogos).
-     */
     public static SimpleList<String> loadList(String filePath) {
         return loadListFromJson(filePath, String.class);
     }
 
-    /**
-     * Exporta datos en formato CSV para la generación de reportes.
-     */
     public static void exportToCSV(String filePath, String header, SimpleList<String> rows) {
         if (filePath == null || filePath.isBlank() || rows == null) {
             return;

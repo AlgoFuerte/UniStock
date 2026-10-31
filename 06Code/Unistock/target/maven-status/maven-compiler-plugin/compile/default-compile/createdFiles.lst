@@ -8,6 +8,7 @@ ec\edu\espe\unistock\service\UserService.class
 ec\edu\espe\unistock\model\User.class
 ec\edu\espe\unistock\service\StationeryService.class
 ec\edu\espe\unistock\structure\SimpleList.class
+ec\edu\espe\unistock\service\ProductService$UniformJson.class
 ec\edu\espe\unistock\model\Sale.class
 ec\edu\espe\unistock\service\ProductService.class
 ec\edu\espe\unistock\view\CatalogMenuView.class

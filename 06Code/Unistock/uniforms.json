@@ -1,0 +1,32 @@
+[
+  {
+    "school": "Conocoto",
+    "size": "M",
+    "name": "Camiseta Polo",
+    "price": 12.50
+  },
+  {
+    "school": "Conocoto",
+    "size": "S",
+    "name": "Saco Azul Electrico",
+    "price": 23.50
+  },
+  {
+    "school": "Conocoto",
+    "size": "M",
+    "name": "Medias Blancas",
+    "price": 2.50
+  },
+  {
+    "school": "Conocoto",
+    "size": "M",
+    "name": "Pantalon Gris",
+    "price": 12.50
+  },
+  {
+    "school": "Conocoto",
+    "size": "M",
+    "name": "Zapato Bonito",
+    "price": 100
+  }
+]
